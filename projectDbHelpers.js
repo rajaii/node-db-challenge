@@ -24,10 +24,11 @@ function findProjects() {
 function postProjects(project) {
     return db('projects').insert(project);
 }
-function findTasks() {
+function findTasks(id) {
     return db('tasks')
     .join('projects', 'projects.id', '=', 'tasks.project_id')
-    .select('project_id','projects.name as project_name', 'tasks.id', 'tasks.description', 'tasks.notes', 'tasks.completed');
+    .select('project_id','projects.name as project_name', 'tasks.id', 'tasks.description', 'tasks.notes', 'tasks.completed')
+    .where({project_id: id})
 }
 
 function postTask(task) {

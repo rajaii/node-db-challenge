@@ -62,9 +62,10 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.get('/tasks', async (req, res) => {
+router.get('/:id/tasks', async (req, res) => { //misssed the id here
     try {
-        let task = await projectDb.findTasks();
+        let { id } = req.params;
+        let task = await projectDb.findTasks(id);
         let newTask = [];
         task.map(t => {
             if (t.completed === 1) {
